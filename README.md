@@ -4,7 +4,7 @@
 
 ! References:
 ! Bui TQ, Hu XF(*). A review of phase-field models, fundamentals and their applications to composite 
-! laminates. Engineering Fracture Mechanics, 2021, 107705.
+! laminates. Engineering Fracture Mechanics, 2021, 107705. 
 ! Hu XF, Zhang P, Yao WA(*). Phase field modelling of microscopic 
 ! failure in composite laminates. Journal of Composite Materials, 2020: 0021998320976794.
 ! Zhang P, Hu XF(*), Yao WA, Bui TQ. An explicit phase field model for progressive tensile failure of 
