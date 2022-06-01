@@ -78,7 +78,7 @@
           END DO
       CALL GAUSS_IPT(GAUSS,WEIGHT)
       ! --------------------------------------------------
-      ! 4. Calculating properties at each integral point¡ý
+      ! 4. Calculating properties at each integral pointÂ¡Ã½
       LOOP_IPT :DO ipt=1,4
       ! ------------------------------< LOOP:Begin >----------------------------------
           xi  = GAUSS(ipt,1); eta = GAUSS(ipt,2)  ! Local coordinates of ipt
