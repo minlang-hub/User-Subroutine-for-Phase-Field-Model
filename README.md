@@ -1,6 +1,6 @@
 # User-Subroutine-for-Phase-Field-Model
 
-The supplementary materials of the simulations of an L-shaped panel using different phase field moeld is provided, see the document attached for detailed description of the problem and the results.
+<font size=1>The supplementary materials of the simulations of an L-shaped panel using different phase field moeld is provided here, see the document attached for detailed description of the problem and the results.<\font>
 
 
 References:<br>
