@@ -81,11 +81,11 @@ C     time indices
       if ( lflags(iOpCode).eq.jMassCalc ) then
           ! define mass matrice
           do kblock = 1,nblock
-              ! coordinate 1¡¢2¡¢3¡¢4
+              ! coordinate 1ã€2ã€3ã€4
                           !x1 x2 x3 x4
                           !y1 y2 y3 y4
               do i=1,2
-                  do j=1,4                  !µ¥ÔªºÅ  ½ÚµãºÅ  x/y×ø±ê
+                  do j=1,4
                       coordinate(i,j)=coords(kblock,j,i)
                   enddo
               enddo
@@ -94,7 +94,7 @@ C     time indices
      & copy_props,coordinate)
 
               do i=1,4
-                  amass(kblock,3*i-2,3*i-2)=dis_mass(2*i-1,2*i-1)   !¶Ô½ÇÕó
+                  amass(kblock,3*i-2,3*i-2)=dis_mass(2*i-1,2*i-1)
                   amass(kblock,3*i-1,3*i-1)=dis_mass(2*i,2*i)
                   amass(kblock,3*i,3*i)    =dd_mass(i,i)
               enddo
@@ -117,7 +117,7 @@ C     time indices
               
               !====== must be refined when considering multiple integral points =========
               do i=1,1
-                  val_svars(i)=svars(kblock,i)    !val_svarsËÄ¸ö×´Ì¬±äÁ¿£¨ËÄ¸ö»ı·Öµã£©
+                  val_svars(i)=svars(kblock,i)
               enddo
               
  
@@ -125,20 +125,20 @@ C     time indices
      &                                coordinate,sub_u,sub_d,val_svars)
               
               do i=1,1
-                  svars(kblock,i)=val_svars(i)    !¸üĞÂ×´Ì¬±äÁ¿
+                  svars(kblock,i)=val_svars(i) 
               enddo
               
               
               do i=1,4
-                  rhs(kblock,3*i-2)=dis_rhs(2*i-1,1)    !½«dis_rhs¡¢dd_rhs°´ÒªÇóÎ»ÖÃ·ÅÈërhsÖĞ
+                  rhs(kblock,3*i-2)=dis_rhs(2*i-1,1)
                   rhs(kblock,3*i-1)=dis_rhs(2*i,1)
                   rhs(kblock,3*i)  =dd_rhs(i,1)
               enddo
               
               ! stable time step
               dtimeStable(kblock)=copy_props(9)
-              energy(kblock, iElKe) = 0.d0    !¶¯ÄÜÎªÁã
-              energy(kblock, iElIe) = 0.d0    !Internal energyÎªÁã
+              energy(kblock, iElKe) = 0.d0  
+              energy(kblock, iElIe) = 0.d0  
 
           enddo
       endif
@@ -149,7 +149,6 @@ C     time indices
       subroutine gen_mass_matrix(dis_mass,dd_mass,props,coords)
       ! props(8)  [E mu thickness Gf ft lb v_eta ro time_step ]
       !            1  2     3      4  5  6   7    8     9     
-                                                !ÃÜ¶È
       implicit none
       real(8):: dis_mass(8,8), dd_mass(4,4)
       real(8):: props(9),coords(2,4)
@@ -335,7 +334,7 @@ C     time indices
                   omega=0.d0
               endif
               
-              eff_stress=omega*matmul(d,matmul(b,uu))      !ÓĞĞ§Ó¦Á¦
+              eff_stress=omega*matmul(d,matmul(b,uu))
               !eff_stress=omega*stress_plus+stress_minus
               dis_rhs=dis_rhs+gwight(i)*gwight(j)*
      &        (matmul(transpose(b),eff_stress))*det_jacb*thickness
@@ -355,7 +354,7 @@ C     time indices
           dd1(i,1)=1.d0
       enddo
 
-      d_c=dd1-dd;                      !!!!!!!!
+      d_c=dd1-dd; 
       d_c=d_c/props(9)
       
       r_c=matmul(dd_mass,d_c)
@@ -556,9 +555,7 @@ C     time indices
       stress_p=0.d0; stress_m=0.d0
       
       E=props(1);   mu=props(2)
-      !Æ½ÃæÓ¦±ä
       !lamd=E*mu/((1.d0+mu)*(1.d0-2.d0*mu)); G=E/(2.d0*(1.d0+mu))
-      !Æ½ÃæÓ¦Á¦
       lamd=E*mu/(1.d0-mu**2.d0); G=E/(2.d0*(1.d0+mu))
       
       epsi=matmul(b,uu)
