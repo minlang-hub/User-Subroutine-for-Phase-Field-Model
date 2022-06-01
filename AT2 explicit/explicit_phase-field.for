@@ -149,7 +149,6 @@ C     time indices
       subroutine gen_mass_matrix(dis_mass,dd_mass,props,coords)
       ! props(8)  [E mu thickness Gf lb v_eta ro time_step ]
       !            1  2     3      4  5   6    7     8        
-                                                !密度
       implicit none
       real(8):: dis_mass(8,8), dd_mass(4,4)
       real(8):: props(8),coords(2,4)
@@ -522,9 +521,7 @@ C     time indices
       stress_p=0.d0; stress_m=0.d0
       
       E=props(1);   mu=props(2)
-      !平面应变
       !lamd=E*mu/((1.d0+mu)*(1.d0-2.d0*mu)); G=E/(2.d0*(1.d0+mu))
-      !平面应力
       lamd=E*mu/(1.d0-mu**2.d0); G=E/(2.d0*(1.d0+mu))
       
       epsi=matmul(b,uu)
