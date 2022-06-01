@@ -20,7 +20,7 @@
       subroutine element_isotropic(rhs,amatrx,props,coords,u,svars)
       implicit none
 !     props=[ E  mu  t  Gc  lb] 
-!     coordinate 1¡¢2¡¢3¡¢4
+!     coordinate 1ã€2ã€3ã€4
 !               x1 x2 x3 x4
 !               y1 y2 y3 y4      
       real(8):: rhs(12,1), amatrx(12,12)
@@ -68,30 +68,25 @@
       
       Gf=props(4);  lb=props(5)        
       
-      !¸ßË¹»ı·Öµã¼°È¨ÖØ
       numgus=2
       guassp(1)=-0.577350269189626; guassp(2)=0.577350269189626        
       gwight(1)=1.d0;  gwight(2)=1.d0
       !guassp(1)=0.d0; gwight(1)=2.d0
       !numgus=1      
           
-      !¸ßË¹»ı·Ö£¨ÇóºÍ£©
       do i=1,numgus
           do j=1,numgus 
-              !jacob¡¢inv_jacob¡¢det_jacob
+              !jacobã€inv_jacobã€det_jacob
               call jacob_matrix(jacb,inv_jacb,det_jacb,guassp(i),
      &                            guassp(j),coords)    
               !nd,bd,b
               call b_matrix(nd,bd,b,inv_jacb,guassp(i),guassp(j))     
               
-              !µ¥ÔªÏà³¡º¯Êıppf
               call matmul_uel(nd,dd,ppf,1,1,4)
               pf=ppf(1,1)        
               
-              !µ¯ĞÔ¾ØÕó
               call d_matrix(d,props)        
           
-              !HÀúÊ·×î´óµÄenergy_plus
               call gener_engeryp(energy_plus,b,uu,props)         
               if (svars(2*(i-1)+j)>energy_plus) then
                   energy_plus=svars(2*(i-1)+j)
@@ -99,9 +94,7 @@
                   svars(2*(i-1)+j)=energy_plus
               endif
 
-              !¼¸ºÎº¯Êıalpha_dµÄÒ»½×µ¼dalphaÒÔ¼°¶ş½×µ¼ddalpha(c0Îªpi£©
               call alpha_dd(dalpha,pf,ddalpha)
-              !ÍË»¯º¯Êıomega¡¢Ò»½×µ¼Êıdomega¡¢¶ş½×µ¼Êıddomega
               call degradfunc(omega,domega,ddomega,pf)
    
               ph_energy=domega*energy_plus+Gf/c0*1.d0/lb*dalpha
@@ -190,12 +183,12 @@
       n(3)=1.d0/4.d0*(1.d0+xi)*(1.d0+eta)
       n(4)=1.d0/4.d0*(1.d0-xi)*(1.d0+eta)
       
-      dn_xieta(1,1)=-1.d0/4.d0*(1.d0-eta)     !¶ÔxiÇóÆ«µ¼
+      dn_xieta(1,1)=-1.d0/4.d0*(1.d0-eta)
       dn_xieta(1,2)= 1.d0/4.d0*(1.d0-eta)
       dn_xieta(1,3)= 1.d0/4.d0*(1.d0+eta)
       dn_xieta(1,4)=-1.d0/4.d0*(1.d0+eta)
       
-      dn_xieta(2,1)=-1.d0/4.d0*(1.d0-xi)      !¶ÔetaÇóÆ«µ¼
+      dn_xieta(2,1)=-1.d0/4.d0*(1.d0-xi)
       dn_xieta(2,2)=-1.d0/4.d0*(1.d0+xi)
       dn_xieta(2,3)= 1.d0/4.d0*(1.d0+xi)
       dn_xieta(2,4)= 1.d0/4.d0*(1.d0-xi)
@@ -243,7 +236,7 @@
       call shapefuc(n,dn_xieta,xi,eta)
       
       do i=1,4
-          nd(1,i)=n(i)   !ĞÎº¯ÊıÅÅÁĞ³ÉĞĞÏòÁ¿
+          nd(1,i)=n(i)
       enddo
       
       do i=1,4
@@ -312,7 +305,6 @@
       end subroutine gener_engeryp        
 !==================matrix multiplication=======================================
       subroutine matmul_uel(a,b,c,m,n,l)
-!     ¾ØÕó³Ë·¨a¡Áb=c 
       implicit none
       integer i, j, k, m, n, l
       real(8):: a(m,l),b(l,n),c(m,n)
@@ -327,7 +319,6 @@
       end subroutine matmul_uel
 !==================matrix transpose=======================================
       subroutine transpose_uel(a,a_t,m,n)           
-!     ¾ØÕó×ªÖÃ
       implicit none
       integer i,j,m,n
       real(8):: a(m,n),a_t(n,m)
